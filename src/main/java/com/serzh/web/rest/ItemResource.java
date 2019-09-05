@@ -51,7 +51,7 @@ public class ItemResource {
         return itemService.find(id);
     }
 
-    @ApiOperation(value = "Update item")
+    @ApiOperation(value = "Update Item")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ItemResponseDTO update(@PathVariable Long id, @Valid @RequestBody ItemRequestDTO itemRequestDTO) {

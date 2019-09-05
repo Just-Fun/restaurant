@@ -7,7 +7,7 @@ import com.serzh.service.ItemService;
 import com.serzh.service.dto.ItemRequestDTO;
 import com.serzh.service.dto.ItemResponseDTO;
 import com.serzh.service.mapper.ItemMapper;
-import com.serzh.service.util.ItemSpecification;
+import com.serzh.service.component.ItemSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +18,12 @@ import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.Optional;
 
+import static com.serzh.service.util.Constants.ITEM_WAS_NOT_FOUND_BY_ID;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService {
-
-    private static final String ITEM_WAS_NOT_FOUND_BY_ID = "Item was not found by id = %d";
 
     private final ItemRepository itemRepository;
     private final TypeRepository typeRepository;

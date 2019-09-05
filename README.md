@@ -18,6 +18,8 @@ http://localhost:8081/swagger-ui.html
 
 ### Or command line
 
+### Items menu
+
 Get all items
 
 ```
@@ -52,4 +54,12 @@ curl -X PUT "http://localhost:8081/api/v1/items/8" -H "accept: */*" -H "Content-
 Delete Item
 ```
 curl -X DELETE "http://localhost:8081/api/v1/items/2"
+```
+
+
+### Orders menu
+
+Creates a New Order
+```
+curl -X POST "http://localhost:8081/api/v1/orders" -H "accept: */*" -H "Content-Type: application/json" -d "[ { \"itemId\": 1, \"quantity\": 2 },{ \"itemId\": 2, \"quantity\": 1 }]"
 ```
