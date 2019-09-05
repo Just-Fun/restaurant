@@ -1,7 +1,7 @@
 package com.serzh.web.rest;
 
 import com.serzh.service.dto.TypeDTO;
-import com.serzh.service.impl.TypeService;
+import com.serzh.service.TypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.serzh.service;
+package com.serzh.service.util;
 
 import com.serzh.domain.Item;
 import com.serzh.domain.Type;

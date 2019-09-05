@@ -1,6 +1,7 @@
 package com.serzh.service.impl;
 
 import com.serzh.repository.TypeRepository;
+import com.serzh.service.TypeService;
 import com.serzh.service.dto.TypeDTO;
 import com.serzh.service.mapper.TypeMapper;
 import lombok.RequiredArgsConstructor;
