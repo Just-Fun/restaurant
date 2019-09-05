@@ -63,3 +63,12 @@ Creates a New Order
 ```
 curl -X POST "http://localhost:8081/api/v1/orders" -H "accept: */*" -H "Content-Type: application/json" -d "[ { \"itemId\": 1, \"quantity\": 2 },{ \"itemId\": 2, \"quantity\": 1 }]"
 ```
+
+Update Order
+```
+curl -X PUT "http://localhost:8081/api/v1/orders/1" -H "accept: */*" -H "Content-Type: application/json" -d "[ { \"itemId\": 1, \"quantity\": 1 },{ \"itemId\": 2, \"quantity\": 2 },{ \"itemId\": 4, \"quantity\": 4 }]"
+```
+Check Bill by Order id
+```
+curl -X GET "http://localhost:8081/api/v1/orders/1" -H "accept: */*"
+```

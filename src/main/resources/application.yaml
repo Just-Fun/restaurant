@@ -8,3 +8,4 @@ spring:
       hibernate.generate_statistics: true
       hibernate.show_sql: true
       hibernate.format_sql: true
+      hibernate.jdbc.batch_size: 10

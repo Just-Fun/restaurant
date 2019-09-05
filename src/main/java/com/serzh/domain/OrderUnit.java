@@ -21,9 +21,11 @@ import static com.serzh.service.util.Constants.DATE_TIME_FORMAT_PATTERN;
 public class OrderUnit implements Serializable {
 
     private static final long serialVersionUID = -8137927472202281169L;
+    private static final String ORDER_UNIT_SEQ = "ORDER_UNIT_SEQ";
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ORDER_UNIT_SEQ)
+    @SequenceGenerator(name = ORDER_UNIT_SEQ, sequenceName = "SEQUENCE_ORDER_UNIT", allocationSize = 10)
     private Long id;
 
     @ManyToOne

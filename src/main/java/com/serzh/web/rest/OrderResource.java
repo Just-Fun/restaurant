@@ -1,9 +1,8 @@
 package com.serzh.web.rest;
 
 import com.serzh.service.dto.BillResponseDTO;
-import com.serzh.service.dto.ItemResponseDTO;
 import com.serzh.service.dto.OrderRequestDTO;
-import com.serzh.service.impl.OrderServiceImpl;
+import com.serzh.service.impl.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/orders")
 public class OrderResource {
 
-    private final OrderServiceImpl orderService; // TODO interface
-//    private final ItemMapper itemMapper;
+    private final OrderService orderService;
 
     @ApiOperation(value = "Creates a New Order")
     @PostMapping
@@ -32,12 +30,12 @@ public class OrderResource {
     @ApiOperation(value = "Update Order")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ItemResponseDTO update(@PathVariable Long id, @Valid @RequestBody List<OrderRequestDTO> orderRequestDTOs) {
-        return orderService.update(id, orderRequestDTOs);
+    public void addItem(@PathVariable Long id, @Valid @RequestBody List<OrderRequestDTO> orderRequestDTOs) {
+        orderService.updateOrder(id, orderRequestDTOs);
     }
 
-    @ApiOperation(value = "Check Bill by Order id")
-    @GetMapping("/{id}")
+    @ApiOperation(value = "Check Bill Order by id")
+    @GetMapping("/{id}/check")
     @ResponseStatus(HttpStatus.OK)
     public BillResponseDTO check(@PathVariable Long id) {
         return orderService.check(id);

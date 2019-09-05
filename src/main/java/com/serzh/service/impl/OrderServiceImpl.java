@@ -5,10 +5,9 @@ import com.serzh.domain.Item;
 import com.serzh.domain.OrderUnit;
 import com.serzh.repository.BillOrderRepository;
 import com.serzh.repository.ItemRepository;
-import com.serzh.repository.OrderRepository;
+import com.serzh.repository.OrderUnitRepository;
 import com.serzh.service.component.OrderConverter;
 import com.serzh.service.dto.BillResponseDTO;
-import com.serzh.service.dto.ItemResponseDTO;
 import com.serzh.service.dto.OrderRequestDTO;
 import com.serzh.service.mapper.OrderUnitMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +25,15 @@ import static com.serzh.service.util.Constants.ITEM_WAS_NOT_FOUND_BY_ID;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
+    private final OrderUnitRepository orderUnitRepository;
     private final BillOrderRepository billOrderRepository;
     private final ItemRepository itemRepository;
     private final OrderConverter orderConverter;
     private final OrderUnitMapper orderUnitMapper;
 
+    @Override
     public Long createOrder(List<OrderRequestDTO> orderRequestDTOs) {
         BillOrder billOrder = billOrderRepository.save(new BillOrder());
 
@@ -44,20 +44,58 @@ public class OrderServiceImpl {
         List<OrderUnit> orderUnits = orderRequestDTOs.stream()
                 .map(payload -> orderConverter.toEntity(payload, billOrder, items)).collect(Collectors.toList());
 
-        orderRepository.saveAll(orderUnits);
+        orderUnitRepository.saveAll(orderUnits);
         return billOrder.getId();
     }
 
-    public ItemResponseDTO update(Long id, List<OrderRequestDTO> orderRequestDTOs) {
 
-        return null;
+    @Override
+    public void updateOrder(Long id, List<OrderRequestDTO> orderRequestDTOs) {
+        BillOrder billOrder = getBillOrder(id);
 
+        Set<OrderUnit> oldOrderUnits = billOrder.getOrderUnits();
+        Set<Long> oldItemIds = oldOrderUnits.stream().map(OrderUnit::getItem)
+                .mapToLong(Item::getId).boxed().collect(Collectors.toSet());
+
+        Set<Long> lastItemIds = orderRequestDTOs.stream().mapToLong(OrderRequestDTO::getItemId).boxed().collect(Collectors.toSet());
+
+        oldOrderUnits.forEach(orderUnit -> {
+            Long itemId = orderUnit.getItem().getId();
+            if (lastItemIds.contains(itemId)) {
+                orderRequestDTOs.stream().filter(dto -> dto.getItemId().equals(itemId)).findFirst().ifPresent(
+                        orderRequestDTO -> {
+                            if (!orderRequestDTO.getQuantity().equals(orderUnit.getQuantity())) {
+                                orderUnit.setQuantity(orderRequestDTO.getQuantity());
+                            }
+                        }
+                );
+            }
+        });
+
+        Set<Long> idToRemove = oldItemIds.stream()
+                .filter(oldItemId -> !lastItemIds.contains(oldItemId))
+                .collect(Collectors.toSet());
+        if (!idToRemove.isEmpty()) {
+            orderUnitRepository.deleteByBillOrder_IdAndItem_IdIn(billOrder.getId(), idToRemove);
+        }
+
+        Set<Long> idToAdd = lastItemIds.stream()
+                .filter(lastItemId -> !oldItemIds.contains(lastItemId))
+                .collect(Collectors.toSet());
+        if (!idToAdd.isEmpty()) {
+            List<Item> items = itemRepository.findAllById(idToAdd);
+
+            List<OrderUnit> orderUnits = orderRequestDTOs.stream()
+                    .filter(dto -> idToAdd.contains(dto.getItemId()))
+                    .map(orderRequestDTO -> orderConverter.toEntity(orderRequestDTO, billOrder, items)).collect(Collectors.toList());
+            orderUnitRepository.saveAll(orderUnits);
+        }
     }
 
+    @Override
     @Transactional(readOnly = true)
     public BillResponseDTO check(Long id) {
-        BillOrder billOrder = billOrderRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(String.format(ITEM_WAS_NOT_FOUND_BY_ID, id)));
+        BillOrder billOrder = getBillOrder(id);
 
         if (!billOrder.getOrderUnits().isEmpty()) {
 
@@ -71,6 +109,11 @@ public class OrderServiceImpl {
         }
 
         throw new RuntimeException("Order is empty");
+    }
+
+    private BillOrder getBillOrder(Long id) {
+        return billOrderRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(ITEM_WAS_NOT_FOUND_BY_ID, id)));
     }
 
 }
