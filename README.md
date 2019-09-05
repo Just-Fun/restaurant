@@ -1,3 +1,9 @@
+# Logic tests
+
+Implementation in class - ```com.serzh.logic.AmpisLogic```
+
+Unit tests in class - ```com.serzh.logic.AmpisLogicTest```
+
 # Project for SDE Backend: Restaurant
 
 
