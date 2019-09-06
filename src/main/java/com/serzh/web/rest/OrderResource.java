@@ -23,15 +23,15 @@ public class OrderResource {
     @ApiOperation(value = "Creates a New Order")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long create(@Valid @RequestBody List<OrderRequestDTO> orderRequestDTOs) {
-        return orderService.createOrder(orderRequestDTOs);
+    public Long create(@Valid @RequestBody List<OrderRequestDTO> orderRequests) {
+        return orderService.createOrder(orderRequests);
     }
 
     @ApiOperation(value = "Update Order")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void addItem(@PathVariable Long id, @Valid @RequestBody List<OrderRequestDTO> orderRequestDTOs) {
-        orderService.updateOrder(id, orderRequestDTOs);
+    public void addItem(@PathVariable Long id, @Valid @RequestBody List<OrderRequestDTO> orderRequests) {
+        orderService.updateOrder(id, orderRequests);
     }
 
     @ApiOperation(value = "Check Bill Order by id")
@@ -40,5 +40,7 @@ public class OrderResource {
     public BillResponseDTO check(@PathVariable Long id) {
         return orderService.check(id);
     }
+
+//    TODO add get bill order, add logic to "check"
 
 }

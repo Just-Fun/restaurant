@@ -40,8 +40,8 @@ public class ItemResource {
     @ApiOperation(value = "Creates a New Item")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ItemResponseDTO create(@Valid @RequestBody ItemRequestDTO itemRequestDTO) {
-        return itemService.create(itemRequestDTO);
+    public ItemResponseDTO create(@Valid @RequestBody ItemRequestDTO item) {
+        return itemService.create(item);
     }
 
     @ApiOperation(value = "Get Item by id")
@@ -54,8 +54,8 @@ public class ItemResource {
     @ApiOperation(value = "Update Item")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ItemResponseDTO update(@PathVariable Long id, @Valid @RequestBody ItemRequestDTO itemRequestDTO) {
-        return itemService.update(id, itemRequestDTO);
+    public ItemResponseDTO update(@PathVariable Long id, @Valid @RequestBody ItemRequestDTO item) {
+        return itemService.update(id, item);
     }
 
     @ApiOperation(value = "Delete Item")

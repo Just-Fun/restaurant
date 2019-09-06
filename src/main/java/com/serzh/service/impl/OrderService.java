@@ -8,7 +8,7 @@ import java.util.List;
 public interface OrderService {
     Long createOrder(List<OrderRequestDTO> orderRequestDTOs);
 
-    void updateOrder(Long id, List<OrderRequestDTO> orderRequestDTOs);
+    void updateOrder(Long id, List<OrderRequestDTO> orderRequest);
 
     BillResponseDTO check(Long id);
 }

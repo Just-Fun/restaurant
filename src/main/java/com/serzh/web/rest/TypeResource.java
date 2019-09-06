@@ -25,4 +25,6 @@ public class TypeResource {
         return typeService.findAll();
     }
 
+//    TODO add CRUD methods
+
 }

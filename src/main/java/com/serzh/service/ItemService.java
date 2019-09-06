@@ -10,11 +10,11 @@ public interface ItemService {
 
     Page<Item> findAll(String keyword, Pageable pageable);
 
-    ItemResponseDTO create(ItemRequestDTO itemRequestDTO);
+    ItemResponseDTO create(ItemRequestDTO item);
 
     ItemResponseDTO find(Long id);
 
-    ItemResponseDTO update(Long id, ItemRequestDTO itemRequestDTO);
+    ItemResponseDTO update(Long id, ItemRequestDTO item);
 
     void delete(Long id);
 

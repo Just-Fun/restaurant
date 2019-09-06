@@ -37,10 +37,10 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemResponseDTO create(ItemRequestDTO itemRequestDTO) {
-        Item item = itemMapper.itemRequestDTOToItem(itemRequestDTO);
+    public ItemResponseDTO create(ItemRequestDTO itemRequest) {
+        Item item = itemMapper.itemRequestDTOToItem(itemRequest);
 
-        Optional.ofNullable(itemRequestDTO.getTypeIds())
+        Optional.ofNullable(itemRequest.getTypeIds())
                 .map(typeRepository::findAllById)
                 .ifPresent(types -> item.setTypes(new HashSet<>(types)));
 
@@ -57,17 +57,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemResponseDTO update(Long id, ItemRequestDTO itemRequestDTO) {
+    public ItemResponseDTO update(Long id, ItemRequestDTO itemRequest) {
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(ITEM_WAS_NOT_FOUND_BY_ID, id)));
 //        TODO check if updated item is different from request, if not - don't do anything
-        item.setName(itemRequestDTO.getName());
-        item.setDescription(itemRequestDTO.getDescription());
-        item.setImage(itemRequestDTO.getImage());
-        item.setPrice(itemRequestDTO.getPrice());
+        item.setName(itemRequest.getName());
+        item.setDescription(itemRequest.getDescription());
+        item.setImage(itemRequest.getImage());
+        item.setPrice(itemRequest.getPrice());
 
 //        TODO before update, check if updated item contains all typeIds, if yes - don't do anything
-        Optional.ofNullable(itemRequestDTO.getTypeIds())
+        Optional.ofNullable(itemRequest.getTypeIds())
                 .map(typeRepository::findAllById)
                 .ifPresent(types -> item.setTypes(new HashSet<>(types)));
 
