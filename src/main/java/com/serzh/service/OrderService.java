@@ -1,4 +1,4 @@
-package com.serzh.service.impl;
+package com.serzh.service;
 
 import com.serzh.service.dto.BillResponseDTO;
 import com.serzh.service.dto.OrderRequestDTO;

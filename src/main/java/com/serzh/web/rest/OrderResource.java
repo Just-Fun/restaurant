@@ -2,7 +2,7 @@ package com.serzh.web.rest;
 
 import com.serzh.service.dto.BillResponseDTO;
 import com.serzh.service.dto.OrderRequestDTO;
-import com.serzh.service.impl.OrderService;
+import com.serzh.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
