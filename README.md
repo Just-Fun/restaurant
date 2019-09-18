@@ -82,6 +82,10 @@ curl -X GET "http://localhost:8081/api/v1/orders/1" -H "accept: */*"
 
 --------------------
 
+Dockerfile:
 DOCKER_BUILDKIT=1 docker build -t serzh/restraurant .
-
 docker run -p 8081:8081 serzh/restraurant
+
+DockerfileSimple:
+docker build -t restraurant .
+docker run -p 8081:8081 restraurant
