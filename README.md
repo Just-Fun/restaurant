@@ -78,3 +78,10 @@ Check Bill by Order id
 ```
 curl -X GET "http://localhost:8081/api/v1/orders/1" -H "accept: */*"
 ```
+
+
+--------------------
+
+DOCKER_BUILDKIT=1 docker build -t serzh/restraurant .
+
+docker run -p 8081:8081 serzh/restraurant

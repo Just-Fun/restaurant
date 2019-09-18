@@ -6,6 +6,10 @@ GET http://localhost:8081/api/v1/items?page=0&size=3&keyword=Italian
 
 ###
 
+GET http://localhost:8080/api/v1/items?page=0&size=3&keyword=Italian
+
+###
+
 POST http://localhost:8081/api/v1/items
 #accept: */*
 Content-Type: application/json
