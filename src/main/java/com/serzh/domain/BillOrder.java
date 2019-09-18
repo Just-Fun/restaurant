@@ -23,6 +23,7 @@ public class BillOrder implements Serializable {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "billOrder")
+//    @BatchSize(size=10)
     private Set<OrderUnit> orderUnits;
 
 }

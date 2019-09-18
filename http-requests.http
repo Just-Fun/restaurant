@@ -1,0 +1,15 @@
+GET http://localhost:8081/api/v1/items
+
+###
+
+GET http://localhost:8081/api/v1/items?page=0&size=3&keyword=Italian
+
+###
+
+POST http://localhost:8081/api/v1/items
+#accept: */*
+Content-Type: application/json
+
+{ "name": "Item name Italian", "description": "Item description", "image": "image address", "price": 123.34, "typeIds": [ 1, 3 ]}
+
+###

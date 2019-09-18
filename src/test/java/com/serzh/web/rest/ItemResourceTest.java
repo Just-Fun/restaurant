@@ -24,6 +24,7 @@ import java.util.HashSet;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -65,6 +66,7 @@ public class ItemResourceTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$.[*].id").value(hasItem(1)))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(ITEM_NAME)))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(ITEM_DESCRIPTION)))
