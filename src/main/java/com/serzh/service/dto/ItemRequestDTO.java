@@ -19,6 +19,7 @@ public class ItemRequestDTO {
     private String description;
     private String image;
     private BigDecimal price;
+    @Builder.Default
     private Set<Long> typeIds = new HashSet<>();
 
 }

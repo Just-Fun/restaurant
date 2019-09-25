@@ -20,6 +20,7 @@ public class ItemResponseDTO {
     private String description;
     private String image;
     private BigDecimal price;
+    @Builder.Default
     private Set<TypeDTO> types = new HashSet<>();
 
 }

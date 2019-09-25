@@ -23,6 +23,7 @@ public class Type implements Serializable {
     @Column(length = 100, unique = true, nullable = false)
     private String name;
 
+    @Builder.Default
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "types")

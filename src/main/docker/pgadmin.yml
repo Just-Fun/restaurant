@@ -1,0 +1,20 @@
+dockepversion: '3'
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+#    image: dpage/pgadmin4:4.13
+    restart: always
+#    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: clear
+    ## you can change pgAdmin default username/password with below environment variables
+    volumes:
+      - /volumes1/health/pgadmin:/root/.pgadmin
+    ports:
+      - 5050:80
+
+#  docker-compose -f pgadmin.yml up
+#  docker-compose -f src/main/docker/pgadmin.yml up
+#  pgAdmin will be available on http://localhost:5050

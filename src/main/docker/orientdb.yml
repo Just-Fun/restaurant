@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+#  orientdb:
+##    image: broadinstitute/orientdb:2.1.0
+#    image: orientdb:2.2.37
+#    ports:
+#      - "2424:2424"
+#      - "2480:2480"
+#    environment:
+#      ORIENTDB_ROOT_PASSWORD: root
+#      ORIENTDB_NODE_NAME: odb1
+#    volumes:
+##      - /orientdb/config:/opt/orientdb/config
+##      - /orientdb/databases:/opt/orientdb/databases
+##      - /orientdb/backup:/opt/orientdb/backup
+#      - /volumes1/odb1/config:/orientdb/config
+#      - /volumes1/odb1/databases:/orientdb/databases
+#      - /volumes1/odb1/backup:/opt/orientdb/backup
+
+  orientdb:
+#    image: orientdb:2.2.20
+    image: orientdb:3.0.23
+    command: dserver.sh
+    volumes:
+#      - ./var/odb1/config:/orientdb/config
+#      - ./var/odb1/databases:/orientdb/databases
+#      - /volumes1/health/orientdb/config:/orientdb/config
+      - /volumes1/health/orientdb/databases:/orientdb/databases
+      - /volumes1/health/orientdb/backup:/opt/orientdb/backup
+    environment:
+#      _JAVA_OPTIONS=-Xms512m -Xmx1g"
+#                  - "ES_JAVA_OPTS=-Xms512m -Xmx1g"
+#      - "ES_JAVA_OPTS=-Xms1g -Xmx2g"
+      ORIENTDB_ROOT_PASSWORD: root
+      ORIENTDB_NODE_NAME: odb1
+    ports:
+      - 2480:2480
+      - 2424:2424
+#        new_one
+
+#  odb2:
+##    image: orientdb:2.2.20
+#    image: orientdb:3.0.23
+#    command: dserver.sh
+#    volumes:
+#      - /volumes1/odb2/config:/orientdb/config
+#      - /volumes1/odb2/databases:/orientdb/databases
+#    environment:
+#      ORIENTDB_ROOT_PASSWORD: root
+#      ORIENTDB_NODE_NAME: odb2
+#    depends_on:
+#      - odb1

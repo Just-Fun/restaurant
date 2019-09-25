@@ -37,6 +37,7 @@ public class Item implements Serializable {
     private BigDecimal price;
 
     @ToString.Exclude
+    @Builder.Default
     @EqualsAndHashCode.Exclude
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "item_types",

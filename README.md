@@ -89,3 +89,5 @@ docker run -p 8081:8081 serzh/restraurant
 DockerfileSimple:
 docker build -t restraurant .
 docker run -p 8081:8081 restraurant
+
+docker-compose -f src/main/docker/orientdb.yml up
