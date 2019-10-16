@@ -1,5 +1,6 @@
 package com.serzh.web.rest;
 
+import com.serzh.configuration.RetryListener;
 import com.serzh.domain.Item;
 import com.serzh.domain.Type;
 import com.serzh.service.ItemService;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -75,6 +79,18 @@ public class ItemResourceTest {
                 .andExpect(jsonPath("$.[*].types[*].name", containsInAnyOrder(ITEM_TYPE_ITALIAN, ITEM_TYPE_HAM)));
 
         verify(itemService, only()).findAll("some", pageOf);
+    }
+
+    @Configuration
+    static class TestConfiguration {
+
+        @Bean
+        @Primary
+        public RetryListener retryListener() {
+//        public RetryListener customRetryListener() {
+//        TODO return new TestRetryListener();
+            return null;
+        }
     }
 
 }

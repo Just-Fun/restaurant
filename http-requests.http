@@ -17,3 +17,9 @@ Content-Type: application/json
 { "name": "Item name Italian", "description": "Item description", "image": "image address", "price": 123.34, "typeIds": [ 1, 3 ]}
 
 ###
+
+POST http://localhost:8081/api/v1/items/learn/1
+
+###
+
+

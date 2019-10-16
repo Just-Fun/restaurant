@@ -18,4 +18,5 @@ public interface ItemService {
 
     void delete(Long id);
 
+    void learn(Long id);
 }

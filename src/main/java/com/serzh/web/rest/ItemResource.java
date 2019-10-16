@@ -1,9 +1,9 @@
 package com.serzh.web.rest;
 
 import com.serzh.domain.Item;
+import com.serzh.service.ItemService;
 import com.serzh.service.dto.ItemRequestDTO;
 import com.serzh.service.dto.ItemResponseDTO;
-import com.serzh.service.ItemService;
 import com.serzh.service.mapper.ItemMapper;
 import com.serzh.web.rest.util.PaginationUtil;
 import io.swagger.annotations.Api;
@@ -63,6 +63,13 @@ public class ItemResource {
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         itemService.delete(id);
+    }
+
+    @ApiOperation(value = "Creates a New Item")
+    @PostMapping("/learn/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void learn(@PathVariable Long id) {
+        itemService.learn(id);
     }
 
 }

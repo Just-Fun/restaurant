@@ -25,7 +25,7 @@ public class OrderUnit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ORDER_UNIT_SEQ)
-    @SequenceGenerator(name = ORDER_UNIT_SEQ, sequenceName = "SEQUENCE_ORDER_UNIT", allocationSize = 10)
+    @SequenceGenerator(name = ORDER_UNIT_SEQ, sequenceName = "SEQUENCE_ORDER_UNIT", allocationSize = 100) //  default 50;
     private Long id;
 
     @ManyToOne

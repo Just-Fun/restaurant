@@ -18,4 +18,5 @@ public interface ItemRepository extends JpaRepository<Item, Long>, JpaSpecificat
     @EntityGraph(attributePaths = "types")
     Page<Item> findByNameContainingOrDescriptionContainingOrTypes_NameContaining(String nameKeyword, String descKeyword, String typeNameKeyword, Pageable pageable);
 
+    //    @Lock(LockModeType.PESSIMISTIC_WRITE)
 }
