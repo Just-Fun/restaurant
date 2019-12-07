@@ -19,6 +19,14 @@ Content-Type: application/json
 ###
 
 POST http://localhost:8081/api/v1/items/learn/1
+###
+POST http://localhost:8081/api/v1/main/save
+###
+POST http://localhost:8081/api/v1/main/get/1
+###
+POST http://localhost:8081/api/v1/main/update/1
+###
+POST http://localhost:8081/api/v1/main/update/2
 
 ###
 

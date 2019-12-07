@@ -2,6 +2,7 @@ package com.serzh.web.rest;
 
 import com.serzh.domain.Item;
 import com.serzh.service.ItemService;
+import com.serzh.service.MainService;
 import com.serzh.service.dto.ItemRequestDTO;
 import com.serzh.service.dto.ItemResponseDTO;
 import com.serzh.service.mapper.ItemMapper;
@@ -65,7 +66,7 @@ public class ItemResource {
         itemService.delete(id);
     }
 
-    @ApiOperation(value = "Creates a New Item")
+    @ApiOperation(value = "Learn")
     @PostMapping("/learn/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void learn(@PathVariable Long id) {

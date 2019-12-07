@@ -1,12 +1,35 @@
+#server:
+#  port: 8081
+#
+#spring:
+#  jpa:
+#    open-in-view: false
+#    show-sql: true
+#    properties:
+#      hibernate.generate_statistics: true
+#      hibernate.show_sql: true
+#      hibernate.format_sql: true
+#      hibernate.jdbc.batch_size: 10
+
 server:
   port: 8081
 
+
 spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/restaurant
+    username: user
+    password: pass
   jpa:
-    open-in-view: false
+#    open-in-view: false
+    database: POSTGRESQL
     show-sql: true
+    generate-ddl: true
     properties:
-      hibernate.generate_statistics: true
+      hibernate.jdbc.lob.non_contextual_creation: true
       hibernate.show_sql: true
       hibernate.format_sql: true
+      hibernate.generate_statistics: true
       hibernate.jdbc.batch_size: 10
+    hibernate.ddl-auto: create-drop
