@@ -6,8 +6,8 @@ import com.serzh.repository.UserProfileRepository;
 import com.serzh.repository.UserRepository;
 import com.serzh.service.MainService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,14 +70,17 @@ public class MainServiceImpl implements MainService {
     @Override
     @Transactional
     public void update(Integer id) {
+      /*  @SuppressWarnings("unchecked")
+        List<UserProfile> profiles = entityManager.createQuery("SELECT p FROM UserProfile p")
+                .getResultList();*/
         try {
             Session session = entityManager.unwrap(Session.class);
-            Query query = session.createSQLQuery("SELECT * FROM user_profile \n" +
+            Query /*or NativeQuery*/ query = session.createSQLQuery("SELECT * FROM user_profile \n" +
                     "WHERE user_profile.user_id = :userId\n" + // !!!!!!
                     //                "WHERE user_profile.id = :userId\n" + // NOT!!!
                     " LIMIT 1\n")
                     .addEntity(UserProfile.class)
-                    .setInteger("userId", id);
+                    .setParameter("userId", id);
             UserProfile userProfile = (UserProfile) query.uniqueResult();
 
             System.out.println();

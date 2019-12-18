@@ -21,10 +21,10 @@
         </layout>
     </appender>
 
-    <Root level="error">
+    <!--<Root level="error">
         <AppenderRef ref="STDOUT"/>
     </Root>
-
+-->
    <!-- # File appender
     <appender name="fout" class="ch.qos.logback.core.FileAppender">
         # Name of a log file

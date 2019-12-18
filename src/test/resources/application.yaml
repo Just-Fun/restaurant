@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  jpa:
+    database: H2
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate.generate_statistics: true
+      hibernate.show_sql: true
+      hibernate.format_sql: true
+      hibernate.jdbc.batch_size: 10
