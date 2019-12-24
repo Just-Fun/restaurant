@@ -93,4 +93,15 @@ public class UserServiceCacheImpl implements UserServiceCache {
     )
     void cacheExample(User user) {
     }
+
+    @Override
+    public List<User> findAllStatusDeletedNativeQuery() {
+        return repository.findAllStatusDeletedNativeQuery();
+    }
+
+
+    @Override
+    public List<User> findAllStatusDeletedQuery() {
+        return repository.findAllStatusDeletedQuery();
+    }
 }

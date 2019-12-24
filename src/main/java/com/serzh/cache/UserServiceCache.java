@@ -21,4 +21,8 @@ public interface UserServiceCache {
     void delete(Long id);
 
     void deleteAndEvict(Long id);
+
+    List<User> findAllStatusDeletedNativeQuery();
+
+    List<User> findAllStatusDeletedQuery();
 }
