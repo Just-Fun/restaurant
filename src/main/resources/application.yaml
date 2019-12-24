@@ -31,3 +31,26 @@ spring:
 #      hibernate.generate_statistics: true
 #      hibernate.jdbc.batch_size: 10
 #    hibernate.ddl-auto: create-drop
+
+management:
+  server:
+    port: 8090
+  #  Эти  endpoint связанные с мониторингом  Spring Boot Actuator, целью является избежание ошибок и увеличение безопасности.
+  #  Но это не обязательно.
+  endpoints:
+    web:
+      base-path: /management
+      exposure:
+        include: "*"
+  #  По умолчанию не все  Endpoint у Spring Boot Actuator активированы. Использовать знак * чтобы активировать все данные Endpoint.
+  endpoint:
+    shutdown.enabled: true
+    #  shutdown это особенный  Endpoint у Spring Boot Actuator, он позволяет вам отключить (shutdown) приложение безопасно,
+    #  не используя такие команды как  "Kill process", "end task" операционной системы.
+    health:
+      #      show-details: when_authorized
+      show-details: ALWAYS
+  #            curl 'http://localhost:8081/management/info' -i -X GET
+  #            curl 'http://localhost:8081/management/health' -i -X GET
+
+info.application.some_custom_property: Some Custom Property Name
